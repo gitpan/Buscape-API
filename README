@@ -1,0 +1,91 @@
+NAME
+    Buscape::API - Wrapper em torno da API do Buscape
+
+VERSION
+    version 0.000001
+
+METHODS
+  new( %args )
+    Construtor. Instancia o objeto da API utilizando os argumentos passados.
+
+    Os argumentos podem ser:
+
+    app_id: Obrigatório. ID da aplicação criada junto ao Buscapé. Veja como
+    fazer isso em
+    <http://developer.buscape.com/tutoriais/procedimentos-para-desenvolver-s
+    ua-aplicacao/>.
+    env: O ambiente onde a API vai se conectar. Pode ter os valores
+    'sandbox' ou 'business'. O default é sandbox.
+    country: A sigla do país onde buscar os dados. Pode ter os valores: BR
+    (Brasil), AR (Argentina), CO (Colômbia), CL (Chile), MX (México), PE
+    (Peru) ou VE(Venezuela).
+    ua: User Agent que utilizado para fazer a requisição. O valor default é
+    uma instância de um objeto "LWP::UserAgent" sem argumentos.
+
+        use Buscape::API;
+        use WWW::Mechanize;
+    
+        my $api = Buscape::API->new(
+            app_id  => 'foobar',
+            env     => 'busuness',
+            country => 'BR',
+            ua      => WWW::Mechanize->new,
+        );
+
+  app_id
+    Retorna o ID da aplicação selecionado no build do objeto.
+
+  env
+    Retorna o ambiente selecionado no build do objeto, podendo ter os
+    valores "sandbox" (default) ou "business" (ambiente de produção).
+
+  country
+    Retorna o país selecionado durante o build do objeto, podendo ter um dos
+    valores: "AR", "BR", "CL", "CO", "MX", "PE" ou "VE".
+
+  service
+    Retorna o hostname onde está o ambiente selecionado, podendo ter os
+    valores "sandbox.buscape.com" (sandbox, o default) ou "bws.buscape.com"
+    (ambiente de produção).
+
+  query( %args )
+    Realiza a requisição sobre a API do Buscapé. A maioria dos argumentos
+    pode ser obtida na documentação oficial da API em
+    <http://developer.buscape.com/api/apis-e-documentacao-buscape/>.
+
+    O formato de retorno pode ser escolhido entre json ou xml, utilizando a
+    chave "format".
+
+    O método a ser executado deve ser passado na chave "method" e pode
+    conter os seguintes valores:
+
+    find_category_list: Retorna a lista de categorias disponiveis;
+    find_product_list: Retorna uma lista de produtos;
+    find_offer_list: Retorna uma lista de ofertas;
+    top_products: Retorna a lista com os produtos mais populares;
+    view_user_ratings: Retorna as avaliações dos usuários de um determinado
+    produto;
+    view_product_details: Retorna os detalhes técnicos de um determinado
+    produto;
+    view_seller_details: Retorna os detalhes de uma determinada loja;
+
+        my $res = $api->query(
+            method      => 'find_product_list',
+            format      => 'json',
+            categoryId  => '3482',
+            keyword     => 'memorias+postumas+de+bras+cubas',
+        );
+
+        my $data = $res->code == 200 ? JSON::from_json( $res->content ) : {};
+
+    Os outros argumentos podem ser obtidos na documentação oficial da API.
+
+AUTHOR
+    Blabos de Blebe <blabos@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by Estante Virtual.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
