@@ -1,5 +1,5 @@
 package Buscape::API;
-$Buscape::API::VERSION = '0.000001';
+$Buscape::API::VERSION = '0.000002';
 use Moo;
 use URI;
 use Carp;
@@ -115,7 +115,7 @@ Buscape::API - Wrapper em torno da API do Buscape
 
 =head1 VERSION
 
-version 0.000001
+version 0.000002
 
 =head1 METHODS
 

@@ -27,8 +27,12 @@ my %WriteMakefileArgs = (
     "Moo" => "1.003001",
     "URI" => "1.60"
   },
-  "TEST_REQUIRES" => {},
-  "VERSION" => "0.000001",
+  "TEST_REQUIRES" => {
+    "JSON" => "2.53",
+    "List::Util" => "1.21",
+    "Test::Most" => "0.31"
+  },
+  "VERSION" => "0.000002",
   "test" => {
     "TESTS" => "t/*.t t/01-build/*.t t/02-query/01-mock/*.t"
   }
@@ -38,8 +42,11 @@ my %WriteMakefileArgs = (
 my %FallbackPrereqs = (
   "Carp" => "1.26",
   "Const::Fast" => "0.013",
+  "JSON" => "2.53",
   "LWP::UserAgent" => "6.05",
+  "List::Util" => "1.21",
   "Moo" => "1.003001",
+  "Test::Most" => "0.31",
   "URI" => "1.60"
 );
 

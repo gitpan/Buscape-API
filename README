@@ -2,7 +2,7 @@ NAME
     Buscape::API - Wrapper em torno da API do Buscape
 
 VERSION
-    version 0.000001
+    version 0.000002
 
 METHODS
   new( %args )

@@ -2,7 +2,10 @@
 abstract: 'Wrapper em torno da API do Buscape'
 author:
   - 'Blabos de Blebe <blabos@cpan.org>'
-build_requires: {}
+build_requires:
+  JSON: 2.53
+  List::Util: 1.21
+  Test::Most: 0.31
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
@@ -21,4 +24,4 @@ requires:
 resources:
   bugtracker: https://github.com/EstanteVirtual/Buscape-API/issues
   repository: https://github.com/EstanteVirtual/Buscape-API
-version: 0.000001
+version: 0.000002
