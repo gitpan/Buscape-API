@@ -2,7 +2,7 @@ NAME
     Buscape::API - Wrapper em torno da API do Buscape
 
 VERSION
-    version 0.000002
+    version 0.000003
 
 METHODS
   new( %args )
@@ -14,6 +14,9 @@ METHODS
     fazer isso em
     <http://developer.buscape.com/tutoriais/procedimentos-para-desenvolver-s
     ua-aplicacao/>.
+    source_id: Obrigatório. ID Lomadee de quem vai publicar sua aplicação.
+    Veja como fazer isso em
+    <http://developer.buscape.com/api/api-e-documentacao-lomadee/>.
     env: O ambiente onde a API vai se conectar. Pode ter os valores
     'sandbox' ou 'business'. O default é sandbox.
     country: A sigla do país onde buscar os dados. Pode ter os valores: BR

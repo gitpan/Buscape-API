@@ -1,5 +1,5 @@
 package Buscape::API;
-$Buscape::API::VERSION = '0.000002';
+$Buscape::API::VERSION = '0.000003';
 use Moo;
 use URI;
 use Carp;
@@ -33,6 +33,11 @@ const our %SERVICES => (
 );
 
 has 'app_id' => (
+    'is'       => 'ro',
+    'required' => 1,
+);
+
+has 'source_id' => (
     'is'       => 'ro',
     'required' => 1,
 );
@@ -87,11 +92,14 @@ has 'ua' => (
 sub query {
     my ( $self, %args ) = @_;
 
-    my $service = $self->service;
-    my $method  = $METHODS{ delete $args{method} };
-    my $app_id  = $self->app_id;
-    my $country = $self->country;
-    my $ua      = $self->ua;
+    my $service   = $self->service;
+    my $method    = $METHODS{ delete $args{method} };
+    my $app_id    = $self->app_id;
+    my $source_id = $self->source_id;
+    my $country   = $self->country;
+    my $ua        = $self->ua;
+
+    $args{'sourceId'} = $source_id;
 
     my $uri = URI->new("http://$service/service/$method/$app_id/$country");
     $uri->query_form(%args);
@@ -115,7 +123,7 @@ Buscape::API - Wrapper em torno da API do Buscape
 
 =head1 VERSION
 
-version 0.000002
+version 0.000003
 
 =head1 METHODS
 
@@ -129,6 +137,9 @@ Os argumentos podem ser:
 
 =item B<app_id>: Obrigatório. ID da aplicação criada junto ao Buscapé.
 Veja como fazer isso em L<http://developer.buscape.com/tutoriais/procedimentos-para-desenvolver-sua-aplicacao/>.
+
+=item B<source_id>: Obrigatório. ID Lomadee de quem vai publicar sua aplicação.
+Veja como fazer isso em L<http://developer.buscape.com/api/api-e-documentacao-lomadee/>.
 
 =item B<env>: O ambiente onde a API vai se conectar. Pode ter os valores
 'sandbox' ou 'business'. O default é sandbox.
